@@ -1,0 +1,35 @@
+{
+  "name": "niublog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/server.js",
+    "build:server": "SSR=true wp --config webpack.config.js",
+    "build:client": "wp --config webpack.config.js",
+    "build": "pnpm build:client && pnpm build:server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vue/server-renderer": "^3.2.33",
+    "koa": "^2.13.4",
+    "koa-static": "^5.0.0",
+    "vue": "^3.2.33"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "@vue/babel-plugin-jsx": "^1.1.1",
+    "babel-loader": "^8.2.4",
+    "eslint": "^8.13.0",
+    "html-webpack-plugin": "^5.5.0",
+    "nodemon": "^2.0.15",
+    "webpack": "^5.72.0",
+    "webpack-manifest-plugin": "^5.0.0",
+    "webpack-nano": "^1.1.1",
+    "webpack-node-externals": "^3.0.0"
+  }
+}
