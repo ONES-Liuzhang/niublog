@@ -1,4 +1,6 @@
 {
+  "app.css": "auto/css/app.css",
   "app.js": "auto/app.js",
+  "341.js": "auto/341.js",
   "index.html": "auto/index.html"
 }

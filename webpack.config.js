@@ -1,5 +1,6 @@
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const nodeExternals = require('webpack-node-externals')
 const path = require('path')
 
@@ -19,6 +20,10 @@ const config = {
   },
   plugins: [
     new WebpackManifestPlugin({ fileName: 'ssr-manifest.json' }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[name].css'
+    })
   ],
   target: 'node',
   externals: [nodeExternals({ allowlist: /\.(css|vue|jsx)/ })],
@@ -41,7 +46,37 @@ const config = {
       exclude: /node_modules/,
       test: /\.jsx/,
       loader: 'babel-loader'
-    }]
+    }, 
+    {
+      // 图片配置
+      test: /\.(png|jpg|bmp|gif)$/i,
+      type: "asset/resource",
+      generator: {
+          fliename: "img/[name].[ext]" // 打包后的图片会被移动到 dist/static文件夹下
+      }
+    },
+    {
+      // 字体配置
+      test: /\.(png|jpg|bmp|gif)$/i,
+      type: "asset/resource",
+      generator: {
+          fliename: "fonts/[name].[ext]" // 打包后的图片会被移动到 dist/fonts文件夹下
+      }
+    },
+    {
+      test: /.css$/,
+      use: [
+        {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+                esModule: false,   // 使用commonjs规范解析css，require引入可以不加.default
+                publicPath: '../../' // 使url的查找路径为dist根路径
+            }
+        },
+        'css-loader',
+        'postcss-loader'
+      ]}
+    ]
   }
 }
 
