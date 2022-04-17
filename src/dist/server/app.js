@@ -196,19 +196,29 @@ const routes = [{
     routes,
   })
 }
+;// CONCATENATED MODULE: ./src/layout/index.jsx
+
+var Layout = {
+  setup: function setup() {
+    return function () {
+      return (0,external_vue_.createVNode)("div", null, [(0,external_vue_.createVNode)("main", {
+        "class": "container mx-auto"
+      }, [(0,external_vue_.createTextVNode)("\u8FD9\u91CC\u662F\u5185\u5BB9")]), (0,external_vue_.createVNode)("header", null, [(0,external_vue_.createTextVNode)("\u8FD9\u91CC\u662F\u5934\u90E8")]), (0,external_vue_.createVNode)((0,external_vue_.resolveComponent)("sidebar"), null, {
+        "default": function _default() {
+          return [(0,external_vue_.createTextVNode)("\u8FD9\u91CC\u662F\u4FA7\u680F")];
+        }
+      })]);
+    };
+  }
+};
+/* harmony default export */ const layout = (Layout);
 ;// CONCATENATED MODULE: ./src/App.jsx
 
 
 /* harmony default export */ const App = ({
   setup: function setup() {
     return function () {
-      return (0,external_vue_.createVNode)("div", null, [(0,external_vue_.createTextVNode)("Hello Vue JSX!"), (0,external_vue_.createVNode)(external_vue_router_namespaceObject.RouterLink, {
-        "to": "/home"
-      }, {
-        "default": function _default() {
-          return [(0,external_vue_.createTextVNode)("Home")];
-        }
-      }), (0,external_vue_.createVNode)(external_vue_router_namespaceObject.RouterView, null, null)]);
+      return (0,external_vue_.createVNode)("div", null, [(0,external_vue_.createVNode)(layout, null, null)]);
     };
   }
 });

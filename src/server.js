@@ -4,6 +4,8 @@ const manifest = require('./dist/server/ssr-manifest.json')
 const path = require('path')
 const fs = require('fs')
 const static = require('koa-static')
+
+// TODO 开发环境下要用其他方式
 const appPath = path.resolve(__dirname, './dist/server', manifest['app.js'])
 const createApp = require(appPath).default
 const { renderToString } = require('@vue/server-renderer')

@@ -1,13 +1,9 @@
-import { RouterView, RouterLink } from "vue-router"
+import Layout from './layout'
 
 export default {
   setup() {
     return () => <div>
-      Hello Vue JSX!
-      <RouterLink to="/home">
-        Home
-      </RouterLink>
-      <RouterView />
+      <Layout />
     </div>
   }
 }
