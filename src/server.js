@@ -11,9 +11,12 @@ const createApp = require(appPath).default
 const { renderToString } = require('@vue/server-renderer')
 
 app.use(async (ctx, next) => {
-  if(ctx.req.url === '/') {
-    const { app, router } = createApp()
-    await router.push(ctx.req.url)
+  // TODO 需要优化路由
+  const { app, router } = createApp()
+  const url = ctx.req.url
+
+  if(router.hasRoute(url)) {
+    await router.push(url)
     await router.isReady()
 
     const appContent = await renderToString(app)
@@ -22,9 +25,9 @@ app.use(async (ctx, next) => {
 
     ctx.header['content-type'] = 'text/html'
     ctx.body = html.replace('<div id="app">', `<div id="app">${appContent}`)
+  } else {
+    await next()
   }
-
-  await next()
 })
 
 app.use(static(path.resolve(__dirname, './dist/client')))
