@@ -8,21 +8,24 @@ const appPath = path.resolve(__dirname, './dist/server', manifest['app.js'])
 const createApp = require(appPath).default
 const { renderToString } = require('@vue/server-renderer')
 
-app.use(static(path.join(__dirname, 'dist/client')))
+app.use(async (ctx, next) => {
+  if(ctx.req.url === '/') {
+    const { app, router } = createApp()
+    await router.push(ctx.req.url)
+    await router.isReady()
 
-app.use(async (ctx) => {
-  console.log('访问资源路径：', ctx.req.url)
-  const { app, router } = createApp()
-  await router.push(ctx.req.url)
-  await router.isReady()
+    const appContent = await renderToString(app)
 
-  const appContent = await renderToString(app)
+    const html = fs.readFileSync(path.resolve(__dirname, 'dist/client/index.html'), 'utf-8')
 
-  const html = fs.readFileSync(path.resolve(__dirname, 'dist/client/index.html'), 'utf-8')
+    ctx.header['content-type'] = 'text/html'
+    ctx.body = html.replace('<div id="app">', `<div id="app">${appContent}`)
+  }
 
-  ctx.header['content-type'] = 'text/html'
-  ctx.body = html.replace('<div id="app">', `<div id="app">${appContent}`)
+  await next()
 })
+
+app.use(static(path.resolve(__dirname, './dist/client')))
 
 app.on('error', (err) => {
   console.log('server error ', err)

@@ -26,13 +26,13 @@ const config = {
     })
   ],
   target: 'node',
-  externals: [nodeExternals({ allowlist: /\.(css|vue|jsx)/ })],
+  externals: process.env.SSR ? [nodeExternals({ allowlist: /\.(css|vue|jsx)/ })] : '',
   output: {
     path: process.env.SSR 
         ? path.resolve(__dirname, 'src/dist/server/') 
         : path.resolve(__dirname, 'src/dist/client/'),
     library: {
-      type: 'commonjs2'
+      type: process.env.SSR ? 'commonjs2' : 'umd'
     },
     clean: true
   },
@@ -70,7 +70,6 @@ const config = {
             loader: MiniCssExtractPlugin.loader,
             options: {
                 esModule: false,   // 使用commonjs规范解析css，require引入可以不加.default
-                publicPath: '../../' // 使url的查找路径为dist根路径
             }
         },
         'css-loader',
