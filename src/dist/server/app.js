@@ -177,12 +177,11 @@ const external_vue_router_namespaceObject = require("vue-router");
 
 
 /**
- * TODO 这个type没用 为啥？
- * @type {import('vue-router').RouteRecordRaw }
+ * @type {import('vue-router').RouteRecordRaw[] }
  */
 const routes = [{
     path: '/',
-    redirect: '/home'
+    redirect: '/home',
   },
   {
     path: '/home',
@@ -231,7 +230,7 @@ var Layout = {
 /* harmony default export */ function entry_server() {
   const app = (0,external_vue_.createSSRApp)(App)
   const router = src_router((0,external_vue_router_namespaceObject.createMemoryHistory)())
-
+  
   app.use(router)
 
   return {

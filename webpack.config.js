@@ -40,6 +40,10 @@ const baseConfig = {
       },
       getCssRules()
     ]
+  },
+  devServer: {
+    host: '0.0.0.0',
+    port: 8888
   }
 }
 
@@ -73,7 +77,7 @@ function extendSSRConfig(config) {
     config.output.library = {
       type: 'commonjs2'
     }
-    config.output.path = path.resolve(__dirname, 'src/dist/server/')
+    config.output.path = path.resolve(__dirname, 'dist/server/')
     config.optimization = {
       splitChunks: false,
       minimize: false
@@ -90,10 +94,11 @@ function extendSSRConfig(config) {
     config.output.library = {
       type: 'umd'
     }
-    config.output.path = path.resolve(__dirname, 'src/dist/client/')
+    config.output.path = path.resolve(__dirname, 'dist/client/')
 
     _addPlugin(config, require('html-webpack-plugin'), {
-      template: 'index.html'
+      template: 'index.html',
+      publicPath: 'http://localhost:8887/'
     })
   }
   

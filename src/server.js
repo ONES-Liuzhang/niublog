@@ -5,13 +5,11 @@ const path = require('path')
 const fs = require('fs')
 const static = require('koa-static')
 
-// TODO 开发环境下要用其他方式
 const appPath = path.resolve(__dirname, './dist/server', manifest['app.js'])
 const createApp = require(appPath).default
 const { renderToString } = require('@vue/server-renderer')
 
 app.use(async (ctx, next) => {
-  // TODO 需要优化路由
   const { app, router } = createApp()
   const url = ctx.req.url
 
@@ -30,6 +28,7 @@ app.use(async (ctx, next) => {
   }
 })
 
+// index.html 请求js文件时去client文件夹获取，进行客户端的渲染
 app.use(static(path.resolve(__dirname, './dist/client')))
 
 app.on('error', (err) => {

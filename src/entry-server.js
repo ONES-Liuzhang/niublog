@@ -6,7 +6,7 @@ import App from './App'
 export default function() {
   const app = createSSRApp(App)
   const router = createRouter(createMemoryHistory())
-
+  
   app.use(router)
 
   return {
