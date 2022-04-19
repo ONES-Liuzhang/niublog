@@ -42,6 +42,7 @@ app.use(async (ctx) => {
   if(!appSourceCode) {
     ctx.body='文件还在编译中！'
   } else {
+    // 获取server端入口app，并通过执行获取其内部导出
     const script = new vm.Script(wrap(appSourceCode), {
       filename: 'app.js',
       displayErrors: true
@@ -63,7 +64,6 @@ app.use(async (ctx) => {
     await router.isReady()
     const appContent = await renderToString(app)
     const html = await axios.get('/index.html').then(res => res.data)
-    // const html = mfs.readFileSync(path.resolve(__dirname, 'dist/client/index.html'), 'utf-8')
 
     ctx.header['content-type'] = 'text/html'
     ctx.body = html.replace('<div id="app">', `<div id="app">${appContent}`)

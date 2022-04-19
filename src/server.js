@@ -35,4 +35,6 @@ app.on('error', (err) => {
   console.log('server error ', err)
 })
 
-app.listen(3333)
+app.listen(3333, () => {
+  console.log('server listening on 3333')
+})

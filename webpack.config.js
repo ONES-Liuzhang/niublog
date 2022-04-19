@@ -77,7 +77,7 @@ function extendSSRConfig(config) {
     config.output.library = {
       type: 'commonjs2'
     }
-    config.output.path = path.resolve(__dirname, 'dist/server/')
+    config.output.path = path.resolve(__dirname, 'src/dist/server/')
     config.optimization = {
       splitChunks: false,
       minimize: false
@@ -94,11 +94,13 @@ function extendSSRConfig(config) {
     config.output.library = {
       type: 'umd'
     }
-    config.output.path = path.resolve(__dirname, 'dist/client/')
+    config.output.path = path.resolve(__dirname, 'src/dist/client/')
 
+    const publicPath = isDev ? 'http://localhost:8887/' : './'
+    
     _addPlugin(config, require('html-webpack-plugin'), {
       template: 'index.html',
-      publicPath: 'http://localhost:8887/'
+      publicPath,
     })
   }
   

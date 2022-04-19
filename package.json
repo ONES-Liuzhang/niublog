@@ -6,7 +6,7 @@
   "scripts": {
     "dev:server": "SSR=true nodemon ./src/dev-server.js",
     "dev:client": "nodemon ./src/dev-client.js",
-    "dev": "concurrently ",
+    "dev": "NODE_ENV=development concurrently \"pnpm dev:client\" \"pnpm dev:server\"",
     "start": "nodemon ./src/server.js",
     "build:server": "SSR=true wp --config webpack.config.js",
     "build:client": "wp --config webpack.config.js",

@@ -30,12 +30,14 @@ const app = new Koa()
 
 app.use(async (ctx) => {
   const url = ctx.req.url
+  console.log('发起文件请求：', url)
   try {
-    console.log(path.resolve(outputPath, `.${url}`))
-    const fileContent = mfs.readFileSync(path.resolve(outputPath, `.${url}`))
+    const sourcePath = path.resolve(outputPath, `.${url}`)
+    const fileContent = mfs.readFileSync(sourcePath, 'utf-8')
+    ctx.header['content-type'] = `${path.extname(sourcePath)};charset=utf8;`
     ctx.body = fileContent
   } catch (err) {
-    console.log('error ', ctx.req.url)
+    console.log('error ', ctx.req.url, err)
     ctx.body = 'ERROR'
   }
 })
