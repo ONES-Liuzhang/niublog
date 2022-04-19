@@ -209,9 +209,11 @@ const routes = [{
 var Layout = {
   setup: function setup() {
     return function () {
-      return (0,external_vue_.createVNode)("div", null, [(0,external_vue_.createVNode)("main", {
+      return (0,external_vue_.createVNode)("div", null, [(0,external_vue_.createVNode)("div", {
         "class": "divide-y divide-gray-200"
-      }, [(0,external_vue_.createTextVNode)("\u8FD9\u91CC\u662F\u5185\u5BB9")]), (0,external_vue_.createVNode)("header", null, [(0,external_vue_.createTextVNode)("\u8FD9\u91CC\u662F\u5934\u90E8")]), (0,external_vue_.createVNode)("div", null, [(0,external_vue_.createTextVNode)("\u8FD9\u91CC\u662F\u4FA7\u680F")])]);
+      }, [(0,external_vue_.createVNode)("span", {
+        "class": "decoration-clone bg-gradient-to-b from-yellow-400 to-red-500 text-transparent ..."
+      }, [(0,external_vue_.createTextVNode)("Hello "), (0,external_vue_.createVNode)("br", null, null), (0,external_vue_.createTextVNode)("World")])]), (0,external_vue_.createVNode)("header", null, [(0,external_vue_.createTextVNode)("\u8FD9\u91CC\u662F\u5934\u90E8")]), (0,external_vue_.createVNode)("div", null, [(0,external_vue_.createTextVNode)("\u8FD9\u91CC\u662F\u4FA7\u680F")])]);
     };
   }
 };
@@ -222,7 +224,7 @@ var Layout = {
 /* harmony default export */ const App = ({
   setup: function setup() {
     return function () {
-      return (0,external_vue_.createVNode)("div", null, [(0,external_vue_.createVNode)(layout, null, null)]);
+      return (0,external_vue_.createVNode)(layout, null, null);
     };
   }
 });
