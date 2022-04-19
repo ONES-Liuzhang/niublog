@@ -55,6 +55,8 @@ app.use(async (ctx) => {
     const { app, router } = m.exports.default()
     const { url } = ctx.req
     
+    console.log(`server 请求:`, url)
+
     if (router.hasRoute(url)) {
       await router.push(url)
     } else {
@@ -65,9 +67,8 @@ app.use(async (ctx) => {
     const appContent = await renderToString(app)
     const html = await axios.get('/index.html').then(res => res.data)
 
-    ctx.header['content-type'] = 'text/html'
+    ctx.set('Content-Type', 'text/html; charset=utf-8;')
     ctx.body = html.replace('<div id="app">', `<div id="app">${appContent}`)
-    
   }
 })
 

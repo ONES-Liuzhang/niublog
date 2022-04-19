@@ -10,6 +10,8 @@ const outputPath = webpackConfig.output.path
 // 指定输出的文件系统为内存
 compiler.outputFileSystem = mfs
 
+const { CONTENT_TYPE_MAP } = require('./utils')
+
 /**
  * @type {import('webpack').Watching}
  */
@@ -34,7 +36,9 @@ app.use(async (ctx) => {
   try {
     const sourcePath = path.resolve(outputPath, `.${url}`)
     const fileContent = mfs.readFileSync(sourcePath, 'utf-8')
-    ctx.header['content-type'] = `${path.extname(sourcePath)};charset=utf8;`
+    console.log(path.extname(sourcePath), CONTENT_TYPE_MAP[path.extname(sourcePath)])
+    
+    ctx.set('Content-Type', `${CONTENT_TYPE_MAP[path.extname(sourcePath)] || 'text/plain'}; charset=utf-8;`)
     ctx.body = fileContent
   } catch (err) {
     console.log('error ', ctx.req.url, err)
