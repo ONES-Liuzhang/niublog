@@ -10,7 +10,8 @@
     "start": "nodemon ./src/server.js",
     "build:server": "SSR=true wp --config webpack.config.js",
     "build:client": "wp --config webpack.config.js",
-    "build": "pnpm build:client && pnpm build:server"
+    "build": "pnpm build:client && pnpm build:server",
+    "debug": "pnpm dev"
   },
   "keywords": [
     "blog",

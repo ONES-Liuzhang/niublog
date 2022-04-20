@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkniublog=self.webpackChunkniublog||[]).push([[476],{476:(n,u,e)=>{e.r(u),e.d(u,{default:()=>l});var t=e(506);const l={name:"Page404",setup:function(){return function(){return(0,t.Wm)("div",null,[(0,t.Uk)("404页面")])}}}}}]);

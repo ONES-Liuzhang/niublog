@@ -13,11 +13,7 @@ const routes = [{
   }, 
   {
     path: '/404',
-    component: {
-      setup() {
-        return () => "404页面！"
-      }
-    }
+    component: () => import('./views/404')
   },
   ...mdRoutes
 ]

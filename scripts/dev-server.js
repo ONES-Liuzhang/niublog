@@ -3,6 +3,7 @@ const webpack = require('webpack')
 // https://github.com/webpack/memory-fs 可以读取内存
 const MemoryFileSystem = require('memory-fs')
 const path = require('path')
+const { loadModule } = require('./utils')
 
 const compiler = webpack(webpackConfig)
 const mfs = new MemoryFileSystem()
@@ -31,9 +32,7 @@ compiler.watch({}, (err, stats) => {
 
 const Koa = require('koa')
 const app = new Koa()
-const vm = require('vm')
 const { renderToString } = require('@vue/server-renderer')
-const { wrap } = require('module')
 const axios = require('axios').create({
   baseURL: 'http://localhost:8887/'
 })
@@ -43,25 +42,17 @@ app.use(async (ctx) => {
     ctx.body='文件还在编译中！'
   } else {
     // 获取server端入口app，并通过执行获取其内部导出
-    const script = new vm.Script(wrap(appSourceCode), {
-      filename: 'app.js',
-      displayErrors: true
-    })
-    const m = {
-      exports: {}
-    }
-    const result = script.runInThisContext()
-    result.call(m.exports, m.exports, require, m)
-    const { app, router } = m.exports.default()
+    const createApp = loadModule(appSourceCode).default
+    const { app, router } = createApp()
     const { url } = ctx.req
     
     console.log(`server 请求:`, url)
 
-    if (router.hasRoute(url)) {
+    // if (router.hasRoute(url)) {
       await router.push(url)
-    } else {
-      await router.push('/404')
-    }
+    // } else {
+    //   await router.push('/home22')
+    // }
 
     await router.isReady()
     const appContent = await renderToString(app)
