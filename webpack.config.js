@@ -41,6 +41,7 @@ const baseConfig = {
       {
         test: /\.md/,
         use: ['html-loader', 'markdown-loader']
+        // use: [require('./loaders/md-loader')]
       },
       getCssRules()
     ]

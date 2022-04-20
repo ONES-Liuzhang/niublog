@@ -16,6 +16,7 @@ specifiers:
   koa: ^2.13.4
   koa-static: ^5.0.0
   markdown-loader: ^8.0.0
+  marked: ^4.0.14
   memory-fs: ^0.5.0
   mini-css-extract-plugin: ^2.6.0
   nodemon: ^2.0.15
@@ -53,6 +54,7 @@ devDependencies:
   html-loader: registry.npmmirror.com/html-loader/3.1.0_webpack@5.72.0
   html-webpack-plugin: registry.npmmirror.com/html-webpack-plugin/5.5.0_webpack@5.72.0
   markdown-loader: registry.npmmirror.com/markdown-loader/8.0.0_webpack@5.72.0
+  marked: registry.npmmirror.com/marked/4.0.14
   memory-fs: registry.npmmirror.com/memory-fs/0.5.0
   mini-css-extract-plugin: registry.npmmirror.com/mini-css-extract-plugin/2.6.0_webpack@5.72.0
   nodemon: registry.npmmirror.com/nodemon/2.0.15

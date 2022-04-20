@@ -4,6 +4,7 @@ import createRouter from './router'
 import App from './App'
 
 import "tailwindcss/tailwind.css"
+import "./styles/github-markdown-light.css"
 
 // 创建路由实例
 const router = createRouter(createWebHistory())
