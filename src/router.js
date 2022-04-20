@@ -1,5 +1,5 @@
 import { createRouter } from 'vue-router'
-import { routes as mdRoutes } from './md'
+import { routes as mdRoutes } from './docs'
 /**
  * @type {import('vue-router').RouteRecordRaw[] }
  */

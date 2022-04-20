@@ -1,4 +1,4 @@
-import { treeNode } from '../md'
+import { treeNode } from '../docs'
 import NavbarItem from './navbarItem'
 
 export default {

@@ -1,7 +1,7 @@
 import { h } from 'vue'
 
 // 收集md文件
-const requireContext = require.context('.', true, /\.md$/)
+const requireContext = require.context('.', true, /\.docs$/)
 
 const mdModules = {}
 const routes = []
