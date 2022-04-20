@@ -47,12 +47,12 @@ app.use(async (ctx) => {
     const { url } = ctx.req
     
     console.log(`server 请求:`, url)
-
-    // if (router.hasRoute(url)) {
+    if (router.hasRoute(url)) {
       await router.push(url)
-    // } else {
-    //   await router.push('/home22')
-    // }
+    } else {
+      // TODO 这里没法跳404是为什么
+      await router.push('s')
+    }
 
     await router.isReady()
     const appContent = await renderToString(app)
