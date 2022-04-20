@@ -14,6 +14,14 @@ module.exports = {
       xl: '1280px',
       '2xl': '1536px',
     },
+    extend: {
+      margin: {
+        '-full': '-100%',
+      },
+      lineHeight: {
+        '12': '3rem'
+      }
+    },
     colors: ({ colors }) => ({
       inherit: colors.inherit,
       current: colors.current,

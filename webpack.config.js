@@ -38,6 +38,10 @@ const baseConfig = {
             fliename: "fonts/[name].[ext]" // 打包后的图片会被移动到 dist/fonts文件夹下
         }
       },
+      {
+        test: /\.md/,
+        use: ['html-loader', 'markdown-loader']
+      },
       getCssRules()
     ]
   },
