@@ -1,6 +1,6 @@
 import { h } from 'vue'
 
-// 收集md文件
+// TODO:: 同步收集md文件， -> 后面修改为动态手动配置加载
 const requireContext = require.context('.', true, /\.md$/)
 
 const mdModules = {}
@@ -32,17 +32,10 @@ requireContext.keys().forEach((key) => {
 
   mdModules[routePath] = module
 
-  const component = () => h('session', {
-    class: 'md-wrapper',
-    innerHTML: module.default
-  })
-  // 函数式组件要设置 displayName，不然会报警告
-  component.displayName = routePath
-
   routes.push({
     path: routePath,
     name: routePath,
-    component
+    component: module.default
   })
 })
 
