@@ -56,10 +56,10 @@ app.use(async (ctx, next) => {
 });
 
 app.use(async (ctx, next) => {
-  // 这是直接 index.html 里写死了的，所以需要单独拎出来判断一下
+  // 获取 assets 下的资源文件
   const url = ctx.req.url;
-  if (url === "/assets/favicon.ico") {
-    ctx.set("Content-Type", CONTENT_TYPE_MAP[".ico"]);
+  if (/\/assets\/[\w\d]+\.\w+$/.test(url)) {
+    ctx.set("Content-Type", CONTENT_TYPE_MAP[path.extname(url)]);
     const filePath = path.join(clientOutputPath, `.${url}`);
     const binaryContent = mfs.readFileSync(filePath);
     ctx.body = binaryContent;

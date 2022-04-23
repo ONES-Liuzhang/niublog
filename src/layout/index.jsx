@@ -6,7 +6,7 @@ const Layout = {
     return () => (
       <div class="relative">
         <header class="fixed h-12 w-full leading-12 px-4">
-          {/* <img src="/assets/logo.png"/> */}
+          <img src="/assets/logo.png"/>
         </header>
         <Navbar />
         <div class="pl-80">
