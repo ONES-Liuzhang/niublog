@@ -7,11 +7,12 @@
     "dev:server": "SSR=true nodemon ./scripts/dev-server.js",
     "dev:client": "nodemon ./scripts/dev-client.js",
     "dev": "NODE_ENV=development concurrently \"pnpm dev:client\" \"pnpm dev:server\"",
+    "dev:t": "nodemon ./scripts/dev.js",
     "start": "nodemon ./src/server.js",
     "build:server": "SSR=true wp --config webpack.config.js",
     "build:client": "wp --config webpack.config.js",
     "build": "pnpm build:client && pnpm build:server",
-    "debug": "pnpm dev"
+    "debug": "pnpm dev:t"
   },
   "keywords": [
     "blog",
@@ -36,6 +37,7 @@
     "@vue/babel-plugin-jsx": "^1.1.1",
     "babel-loader": "^8.2.4",
     "concurrently": "^7.1.0",
+    "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.1",
     "eslint": "^8.13.0",
     "html-webpack-plugin": "^5.5.0",

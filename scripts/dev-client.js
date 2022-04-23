@@ -30,15 +30,30 @@ compiler.watch({}, (err, stats) => {
 const Koa = require('koa')
 const app = new Koa()
 
+// 图片资源等文件读取
+app.use(async (ctx, next) => {
+  const url = ctx.req.url
+  console.log(`client 请求:`, url)
+  const ext = path.extname(url)
+
+  if(~['.png', '.ico', '.jpg', '.gif'].indexOf(ext)) {
+    const sourcePath = path.resolve(outputPath, `.${url}`)
+    const binaryContent = mfs.readFileSync(sourcePath)
+
+    ctx.set('Content-Type', `${CONTENT_TYPE_MAP[ext]}`)
+    ctx.body = binaryContent
+  } else {
+    await next()
+  }
+})
+
 app.use(async (ctx) => {
   const url = ctx.req.url
-  console.log('发起文件请求：', url)
   try {
     const sourcePath = path.resolve(outputPath, `.${url}`)
     const fileContent = mfs.readFileSync(sourcePath, 'utf-8')
-    console.log(path.extname(sourcePath), CONTENT_TYPE_MAP[path.extname(sourcePath)])
     
-    ctx.set('Content-Type', `${CONTENT_TYPE_MAP[path.extname(sourcePath)] || 'text/plain'}; charset=utf-8;`)
+    ctx.set('Content-Type', `${CONTENT_TYPE_MAP[path.extname(sourcePath)] || 'text/plain'}`)
     ctx.body = fileContent
   } catch (err) {
     console.log('error ', ctx.req.url, err)

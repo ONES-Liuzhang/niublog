@@ -2,10 +2,14 @@ const vm = require('vm')
 const { wrap } = require('module')
 
 const CONTENT_TYPE_MAP = {
-  '.html': 'text/html',
-  '.css': 'text/css',
-  '.js': 'application/javascript',
-  '.json': 'application/json'
+  '.html': 'text/html;charset=utf-8;',
+  '.css': 'text/css;charset=utf-8;',
+  '.js': 'application/javascript;charset=utf-8;',
+  '.json': 'application/json;charset=utf-8;',
+  '.txt': 'text/plain;charset=utf-8;',
+  '.ico': 'image/x-icon',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
 }
 
 /** 执行字符串 */

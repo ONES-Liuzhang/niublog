@@ -37,6 +37,25 @@ const axios = require('axios').create({
   baseURL: 'http://localhost:8887/'
 })
 
+// icon
+app.use(async (ctx, next) => {
+  const { url } = ctx.req
+  console.log(`server 请求:`, url)
+
+  if(url === '/assets/favicon.ico') {
+    const { headers, data } = await axios.get('/assets/favicon.ico', {
+      responseType: 'stream'
+    })
+
+    data.pipe(mfs.createReadStream('favicon.ico'))
+    const buffer = mfs.readFileSync('favicon.ico')
+    ctx.type = headers['Content-Type']
+    ctx.body = buffer
+  } else {
+    await next()
+  }
+})
+
 app.use(async (ctx) => {
   if(!appSourceCode) {
     ctx.body='文件还在编译中！'
@@ -46,7 +65,6 @@ app.use(async (ctx) => {
     const { app, router } = createApp()
     const { url } = ctx.req
     
-    console.log(`server 请求:`, url)
     if (router.hasRoute(url)) {
       await router.push(url)
     } else {
