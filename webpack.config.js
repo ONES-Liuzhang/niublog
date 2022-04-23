@@ -40,7 +40,6 @@ const baseConfig = {
       },
       {
         test: /\.md/,
-        // use: ['html-loader', 'markdown-loader']
         use: ['babel-loader', path.resolve('./loaders/md-loader')]
       },
       getCssRules()
