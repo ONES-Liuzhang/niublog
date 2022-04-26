@@ -20,8 +20,11 @@ const NavbarItem = {
 
       return <li>
         {nodeData.routeName 
-          ? <RouterLink class="inline-block px-4 py-2" to={nodeData.routeName}>{ nodeData.title }</RouterLink> 
-          : <div class="cursor-default px-2 py-2">{ nodeData.title }</div>
+          ? <RouterLink class="px-3 py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500" to={nodeData.routeName}>
+            <span class="rounded-md absolute inset-0 bg-cyan-50 opacity-0"></span>
+            <span class="relative">{ nodeData.title }</span>
+          </RouterLink> 
+          : <div class="pt-6 px-3 mb-3 lg:mb-3 uppercase tracking-wide font-semibold text-sm lg:text-xs text-gray-900 cursor-default">{ nodeData.title }</div>
         }
         { childrens }
       </li>
